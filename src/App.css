@@ -1,4 +1,27 @@
+body{
+  margin: 0px;
+  padding: 0px;
+}
+/* ////Navbar style */
+nav{
+  background-color: skyblue;
+  margin-top: 0px;
+  padding: 0px;
+}
 .nav-ul li{
- display: inline-block;
- padding: 10px;
+  display: inline-block;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+ 
+}
+
+
+
+/* Footer  */
+.footer{
+  text-align: center !important;
+  width: 100%;
+  background-color: skyblue;
+  color: black;
 }
