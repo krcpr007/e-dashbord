@@ -4,11 +4,13 @@
   "description": "E-commerce DashBord",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Rajan Kumar",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^6.0.13",
     "nodemon": "^2.0.15"
