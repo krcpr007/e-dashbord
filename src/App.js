@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Signup from './components/Signup';
 import Home from './components/Home';
 import Login from './components/Login';
+import Profile from './components/Profile';
 import PrivateComponent from './components/PrivateComponent';
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
       <Route path="/" element={<Home/>}/>
       <Route path="/addProduct" element={<h1>This is add product </h1>}/>
       <Route path="/updateProduct" element={<h1>This is updateProduct page</h1>}/>
-      <Route path="/profile" element={<h1>This is profile page</h1>}/>
+      <Route path="/profile" element={<Profile/>}/>
       <Route path="/product" element={<h1>This is product page</h1>}/>
       </Route>
       <Route path="/login" element={<Login/>}/>
