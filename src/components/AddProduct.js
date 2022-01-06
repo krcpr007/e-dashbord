@@ -1,31 +1,41 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 function AddProduct() {
-  const [userId, setUserId] = useState("");
+  const navigate = useNavigate();
+  const auth = localStorage.getItem("user");
+  const userData = JSON.parse(auth);
+  //   const [userId, setUserId] = useState(userData._id);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [catogory, setCatogory] = useState("");
   const [company, setCompany] = useState("");
-  const auth = localStorage.getItem("user");
-  //   const userData = auth.JSON.stringify();
+  //   setUserId(userData._id);
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    // console.warn(name,price, catogory,company);
-    let result = await fetch("http://localhost:5000/add-product", {
-      method: "POST",
-      body: JSON.stringify({ name, price, company, catogory, userId }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    result = await result.json();
-    console.warn(result);
+    // console.warn(name, price, catogory, company, userId);
+    if (price !== "" || company !== "" || catogory !== "") {
+      const userId = userData._id;
+      let result = await fetch("http://localhost:5000/add-product", {
+        method: "POST",
+        body: JSON.stringify({ name, price, catogory, company, userId }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      result = await result.json();
+      console.warn(result);
+      if (result) {
+        navigate("/product");
+      } else {
+        alert("enter details first");
+      }
+    }
   };
   return (
     <>
       <div className="container">
         <h1 className="text-4xl text-center">Add Your Product </h1>
-        <div className="items-center border-2 flex p-20 w-1/2">
+        <div className="items-center border-2 flex p-20  md:w-full">
           <form>
             <label htmlFor="productName" className="label">
               Enter your product Name
@@ -74,7 +84,7 @@ function AddProduct() {
               onClick={handleOnSubmit}
             >
               Add Product
-              {/* {userData._id} */}
+              {userData._id}
             </button>
           </form>
         </div>
