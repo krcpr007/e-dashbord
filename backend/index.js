@@ -4,6 +4,7 @@ require("./db/config");
 const User = require("./models/User");
 const Product = require("./models/Product");
 const cors = require("cors");
+const { response } = require("express");
 
 console.log("App listen at port 5000");
 app.use(express.json());
@@ -39,4 +40,23 @@ app.post("/add-product", async (req, resp) => {
   let result = await product.save();
   resp.send(result);
 });
+
+// app.get('/your-products' ,async (req, res) => {
+//   try {
+//       const product = await Product.find({ users: req.user._id });
+//       res.json(product)
+//   } catch (error) {
+//       console.error(error.message);
+//       res.status(500).send("Internal Server Error");
+//   }
+// })
+app.get('/all-products',async(req,resp)=>{
+   let product = await Product.find({});
+   if(product){
+     resp.send(product)
+   }else{
+     resp.send({result:"Doesn't Have data"})
+   }
+})
+
 app.listen(5000);
