@@ -10,7 +10,9 @@ console.log("App listen at port 5000");
 app.use(express.json());
 app.use(cors());
 app.get("/", (req, resp) => {
+
   resp.send("App is Working");
+
 });
 //Api for register
 app.post("/signup", async (req, resp) => {
@@ -41,6 +43,7 @@ app.post("/add-product", async (req, resp) => {
   resp.send(result);
 });
 
+
 // app.get('/your-products' ,async (req, res) => {
 //   try {
 //       const product = await Product.find({ users: req.user._id });
@@ -59,4 +62,17 @@ app.get('/all-products',async(req,resp)=>{
    }
 })
 
+app.post('/yours-products',async(req,resp)=>{
+
+  let product = await Product.find(req.body);
+  if(product){
+    resp.send(product)
+  }else{
+    resp.send({result:"Doesn't Have data"})
+  }
+})
+
+app.get("/update-product",async(req,resp)=>{
+
+})
 app.listen(5000);
