@@ -1,5 +1,6 @@
 import React, { useState ,useEffect } from "react";
 import { Link , useNavigate} from "react-router-dom";
+import { toast } from "react-toastify";
 const Signup = () => {
     const navigate =useNavigate(); 
   const [name, setName] = useState("");
@@ -19,9 +20,12 @@ const Signup = () => {
       console.warn(result);
       localStorage.setItem('user', JSON.stringify(result))
       if(result){
-          navigate('/')
+          navigate('/');
+          toast.success("SignUp successfully")
       }
-
+      else{
+        toast.error("Email already registered");
+      }
   }
     useEffect(() => {
         const auth = localStorage.getItem('user'); 
