@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {toast} from 'react-toastify'
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,8 +19,10 @@ function Login() {
     if (result.name) {
       localStorage.setItem("user", JSON.stringify(result));
       navigate("/");
+      toast.success("Loged In succesfully"); 
     } else {
-      alert("please enter correct details");
+      // alert("please enter correct details");
+      toast.error("Please Enter correct Details")
       setEmail("");
       setPassword("");
     }
@@ -34,11 +37,10 @@ function Login() {
     <div className="hero min-h-screen bg-base-200">
       <div className="flex-col justify-center hero-content lg:flex-row">
         <div className="text-center lg:text-left">
-          <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
+          <h1 className="mb-5 text-5xl font-bold text-indigo-700">Wellcome Back!</h1>
           <p className="mb-5">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+            Thanks for revisting E-dashbord! Many of products waiting for you, glad to see you again. 
+
           </p>
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
@@ -51,7 +53,7 @@ function Login() {
                 <input
                   placeholder="email"
                   className="input input-bordered"
-                  type="text"
+                  type="email"
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
                 />
@@ -67,11 +69,11 @@ function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                 />
-                <label className="label">
-                  <a href="#" className="label-text-alt">
+                <label className="label text-indigo-700 text-sm">
+                  <a href="/" className="">
                     Forgot password?
                   </a>
-                  <p className="label-text-alt">
+                  <p className=" ">
                     <Link to="/signup">Signup</Link>
                   </p>
                 </label>
