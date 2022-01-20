@@ -17,14 +17,14 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 function App() {
   const auth = localStorage.getItem("user");
-  const profileData= JSON.parse(auth)
+  // const profileData= JSON.parse(auth)
   return (
     <BrowserRouter>
     <div className="App">
       <Navbar/>
       <Routes>
-      <Route element={<PrivateComponent/>}>
       <Route path="/" element={<Home/>}/>
+      <Route element={<PrivateComponent/>}>
       <Route path="/addProduct" element={<AddProduct/>}/>
       <Route path="/your-product" element={<YoursProduct/>}/>
       <Route path="/updateProduct" element={<h1>This is updateProduct page</h1>}/>
@@ -33,8 +33,8 @@ function App() {
       {
         auth? (
           <>
-          <Route path={`/${profileData.name}/cart`} element={<ShopingCart/>}/>
-          <Route path={`/${profileData.name}/wishList`} element={<WishList/>}/>
+          <Route path={`/shopingCart`} element={<ShopingCart/>}/>
+          <Route path={`/wishList`} element={<WishList/>}/>
           </>
         ):null
       }
