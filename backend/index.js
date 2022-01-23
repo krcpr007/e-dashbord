@@ -1,11 +1,14 @@
-const express = require("express");
+// import storage from "./cloudinary/index.js";
+// const multer  = require('multer');
+// const upload = multer({ storage })
+// const { response } = require("express");
+// const { replaceOne } = require("./models/User");
+const express = require('express');
 const app = express();
 require("./db/config");
 const User = require("./models/User");
 const Product = require("./models/Product");
 const cors = require("cors");
-const { response } = require("express");
-
 console.log("App listen at port 5000");
 app.use(express.json());
 app.use(cors());
@@ -16,43 +19,56 @@ app.get("/", (req, resp) => {
 });
 //Api for register
 app.post("/signup", async (req, resp) => {
-  const user = new User(req.body);
-  let result = await user.save();
-  result = result.toObject();
-  delete result.password;
-  resp.send(req.body);
-  console.log(result);
+
+  try {
+    const user = new User(req.body);
+    let result = await user.save();
+    result = result.toObject();
+    if(result){
+      delete result.password;
+      resp.send(req.body);
+      console.log(result);
+    }else{
+      console.log("User already register");
+    }
+    
+  } catch (e) {
+    resp.send("Something Went Wrong");
+  }
 });
 //Api for login
 app.post("/login", async (req, resp) => {
-  if (req.body.password && req.body.email) {
-    let user = await User.findOne(req.body).select("-password");
-    if (user) {
-      resp.send(user);
+  try {
+    if (req.body.password && req.body.email) {
+      let user = await User.findOne(req.body).select("-password");
+      if (user) {
+        resp.send(user);
+      } else {
+        resp.send({ result: "No user found" });
+      }
     } else {
       resp.send({ result: "No user found" });
     }
-  } else {
+    
+  } catch (error) {
     resp.send({ result: "No user found" });
+    
   }
 });
 // api for add product
 app.post("/add-product", async (req, resp) => {
-  let product = new Product(req.body);
-  let result = await product.save();
-  resp.send(result);
+  try {
+    let product = new Product(req.body);
+    let result = await product.save();
+    resp.send(result);
+  } catch (error) {
+   resp.send("Error")
+  }
+  // console.log(result, req.files);
+
+
 });
 
-
-// app.get('/your-products' ,async (req, res) => {
-//   try {
-//       const product = await Product.find({ users: req.user._id });
-//       res.json(product)
-//   } catch (error) {
-//       console.error(error.message);
-//       res.status(500).send("Internal Server Error");
-//   }
-// })
 app.get('/all-products',async(req,resp)=>{
    let product = await Product.find({});
    if(product){
@@ -72,6 +88,17 @@ app.post('/yours-products',async(req,resp)=>{
   }
 })
 
+app.delete('/delete-product/:id', async(req,resp)=>{
+       try {
+         let product = await Product.findById({_id:req.params.id}); 
+         if(!product) return resp.send(404).send("Not Found")
+         product= await Product.findByIdAndDelete(req.params.id)
+         resp.json({"msg":"Deleted",product:product})
+       } catch (error) {
+         console.log(error); 
+         resp.send("Something Went Wrong");
+       }
+})
 app.get("/update-product",async(req,resp)=>{
 
 })
