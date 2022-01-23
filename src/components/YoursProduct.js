@@ -26,7 +26,7 @@ function YoursProduct() {
         <h2 className="sr-only">Products</h2>
 
         <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          {data.map((product) => {
+          {data.length!==0?data.map((product) => {
             return (
               <Product
                 key={product._id}
@@ -34,10 +34,11 @@ function YoursProduct() {
                 price={product.price}
                 catogory={product.catogory}
                 company={product.company}
-                catogory={product.catogory}
+                yoursProduct={true}
+                id={product._id}
               />
             );
-          })}
+          }):(<h1 className="text-indigo-700 text-2xl">Don't have your products</h1>)}
           {/* <!-- More products... --> */}
         </div>
       </div>
