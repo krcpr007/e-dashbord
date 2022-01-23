@@ -15,6 +15,7 @@ const ProductSchema = new mongoose.Schema({
   img: {
     data: Buffer,
     contentType: String,
+    // required:true
   },
   company: {
     type: String,
