@@ -8,6 +8,8 @@ const app = express();
 require("./db/config");
 const User = require("./models/User");
 const Product = require("./models/Product");
+const Cart = require('./models/ShopingCart'); 
+const Wishlist = require('./models/Wishlist'); 
 const cors = require("cors");
 console.log("App listen at port 5000");
 app.use(express.json());
@@ -68,13 +70,19 @@ app.post("/add-product", async (req, resp) => {
 
 
 });
-
+// all products available on database
 app.get('/all-products',async(req,resp)=>{
    let product = await Product.find({});
    if(product){
      resp.send(product)
    }else{
      resp.send({result:"Doesn't Have data"})
+   }
+})
+app.get('/search/:query', async(req,resp)=>{
+  let product = await Product.find({name:req.params.query })
+   if(product){
+     resp.send(product); 
    }
 })
 
@@ -102,4 +110,21 @@ app.delete('/delete-product/:id', async(req,resp)=>{
 app.get("/update-product",async(req,resp)=>{
 
 })
+app.get('/wishlists',async(req,resp)=>{
+   let wishlist = new Wishlist(req.body); 
+   let result = await wishlist.save(); 
+   result = result.toObject();
+   if(result){
+     resp.send(result);
+   }
+})
+app.get("/get-wishlist", async (req,resp)=>{
+  let wishlist = await Wishlist.find(req.body); 
+  if(wishlist){
+    resp.send(wishlist); 
+  }else{
+    resp.send({"error":"No Data found"})
+  }
+})
+
 app.listen(5000);
