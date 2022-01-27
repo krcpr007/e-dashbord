@@ -35,7 +35,7 @@ function AddProduct() {
   };
   return (
     <>
-      <div className="hero min-h-screen bg-base-200">
+      <div className="hero min-h-screen ">
       <div className="flex-col justify-center hero-content lg:flex-row">
         <div className="text-center lg:text-left">
           <h1 className="mb-5 text-5xl font-bold">Hello there!!</h1>
@@ -66,9 +66,9 @@ function AddProduct() {
                 />
               </div>
               <div className="form-control">
-                <lable className="label">
+                <label className="label">
                   <span className="label-text">Product Images</span>
-                </lable>
+                </label>
                 <input
                   type="file"
                   
