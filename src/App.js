@@ -1,7 +1,7 @@
 import './App.css';
 import Navbar from './components/Navbar';
 import {BrowserRouter , Routes, Route} from 'react-router-dom'; 
-// import Footer from './components/Footer';
+import Footer from './components/Footer';
 import Products from './components/Products';
 import Signup from './components/Signup';
 import Home from './components/Home';
@@ -12,6 +12,7 @@ import PrivateComponent from './components/PrivateComponent';
 import AddProduct from './components/AddProduct';
 import YoursProduct from './components/YoursProduct';
 import WishList from './components/WishList';
+import ViewProject from './components/ViewProject'
 import ShopingCart from './components/ShopingCart';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -30,6 +31,7 @@ function App() {
       <Route path="/updateProduct" element={<h1>This is updateProduct page</h1>}/>
       <Route path="/profile" element={<Profile/>}/>
       <Route path="/products" element={<Products/>}/>
+      <Route path="/products/:id" element={<ViewProject/>}/>
       {
         auth? (
           <>
@@ -42,7 +44,7 @@ function App() {
       <Route path="/login" element={<Login/>}/>
       <Route path="/signup" element={<Signup/>}/>
       </Routes>
-      {/* <Footer/> */}
+      <Footer/>
       <ToastContainer />
     </div>
     </BrowserRouter>
