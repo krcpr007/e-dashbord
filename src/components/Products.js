@@ -1,51 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import React, { useContext } from "react";
 import Product from "./Product";
-// import { useEffect } from 'react'
-
+import ProductContext from "../context/ProductContext";
 function Products() {
-  const [data, setData] = useState([]);
-  const [search, setSearch] = useState(""); 
-  const allProducts =()=>{
-    fetch("http://localhost:5000/all-products")
-      .then((resp) => resp.json())
-      .then((json) => {
-        setData(json);
-        console.log(json);
-      })
-      .catch((err) => console.log(err));
-  }
-  useEffect(() => {
-    allProducts();
-  }, []);
-  const SearchQuery = async (e)=>{
-    e.preventDefault();
-   fetch(`http://localhost:5000/search/${search}`)
-   .then((resp)=>resp.json())
-   .then((json)=>{
-     setData(json); 
-     console.log(json); 
-    //  toast.success("Item found");
-   }).catch(err=>{
-     console.log(err); 
-     toast.error("Something wrong")
-   })
-  }
-  const handleOnClear =(e)=>{
-    e.preventDefault();
-    setSearch(""); 
-    allProducts();
-  }
+  const { data,search,setSearch ,handleOnClear ,SearchQuery} = useContext(ProductContext);
   return (
     <div className="">
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
       <h1 className="text-center font-semibold text-gray-500 text-lg md:text-4xl">Products are available right now</h1>
-      {/* <input type="text" name="" id="" className="input bg-slate-900" placeholder="Search Product" /> */}
       <form className="flex ">
       <input type="text" id="email-adress-icon" onChange={(e)=>setSearch(e.target.value)} value={search} className="block p-2 pl-10  text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Product"></input>
        <button type="submit" className="text-sm bg-slate-900 rounded-lg mx-1 px-2 py-1" onClick={SearchQuery}>Seacrch</button>
        {
-        search==""?(null):( <button onClick={handleOnClear} className="text-sm bg-slate-900 rounded-lg mx-1 px-3 py-1">Clear</button>)
+        search===""?(null):( <button onClick={handleOnClear} className="text-sm bg-slate-900 rounded-lg mx-1 px-3 py-1">Clear</button>)
        }
        
       </form>
@@ -79,7 +45,7 @@ function Products() {
                 price={product.price}
                 company={product.company}
                 catogory={product.catogory}
-                
+                id={product._id}
               />
             );
           })}
