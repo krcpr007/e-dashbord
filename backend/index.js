@@ -107,10 +107,31 @@ app.delete('/delete-product/:id', async(req,resp)=>{
          resp.send("Something Went Wrong");
        }
 })
-app.get("/update-product",async(req,resp)=>{
+//  Getting a single product 
+app.get('/products/:id', async(req,resp)=>{
+   try {
+     let product = await Product.findById({_id:req.params.id});
+     resp.send(product);
+   } catch (error) {
+     console.log(error);
+     resp.send({result:"not found"});
+   }
+  // if(product){
+  // }else if(!product){
+  //   resp.status(404);
+  //   resp.send({result:"Not found"});
+  // }
 
 })
-app.get('/wishlists',async(req,resp)=>{
+
+// app.put("/update-product/:id",async(req,resp)=>{
+//     // let product = await Product.updateOne({
+//     //   _id:req.params.id}, {$set:req.body})
+//     //   resp.send({updated});
+//     // let product = await  Product.findByIdAndUpdate({_id:req.params.id}, {$set:req.body})
+//     // resp.send(req.body);
+// })
+app.post('/wishlists',async(req,resp)=>{
    let wishlist = new Wishlist(req.body); 
    let result = await wishlist.save(); 
    result = result.toObject();
@@ -126,5 +147,21 @@ app.get("/get-wishlist", async (req,resp)=>{
     resp.send({"error":"No Data found"})
   }
 })
+app.post('/add-to-cart/:id', async(req,resp)=>{
+  let product = new Cart(req.body); 
+  let result = await product.save(); 
+  result = result.toObject(); 
+  if(result){
+    resp.send(result); 
+  }
+})
+app.post('/get-cart', async(req,resp)=>{
+    let cartItem  = await Cart.find(req.body); 
+    if(cartItem){
+      resp.send(cartItem); 
+    }else{
+      resp.send({"error":"No Data found"})
+    }
 
+})
 app.listen(5000);
