@@ -38,16 +38,9 @@ function AddProduct() {
       <div className="hero min-h-screen ">
       <div className="flex-col justify-center hero-content lg:flex-row">
         <div className="text-center lg:text-left">
-          <h1 className="mb-5 text-5xl font-bold">Hello there!!</h1>
-          <p className="mb-5">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium
-            quibusdam optio, incidunt delectus mollitia, autem laboriosam
-            repudiandae commodi, quae est dolorum? Consequuntur id corrupti nemo
-            laboriosam nam inventore, debitis quam. Nemo qui deleniti esse
-            doloribus commodi quia, culpa sapiente officia, eius earum odit
-            voluptatibus enim ut quisquam repellendus ullam facilis a rem
-            obcaecati? Assumenda laborum eaque, quisquam perspiciatis ad
-            voluptates!
+          <h1 className="mb-5 text-5xl text-slate-400 font-medium">Add your product to sell</h1>
+          <p className="mb-5 font-medium text-slate-500">
+            Add your product to sell all over country through E-dashboard. We provide you a online website where you can buy or sell your products.
           </p>
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">

@@ -29,7 +29,6 @@ function App() {
       <Route element={<PrivateComponent/>}>
       <Route path="/addProduct" element={<AddProduct/>}/>
       <Route path="/your-product" element={<YoursProduct/>}/>
-      <Route path="/updateProduct" element={<h1>This is updateProduct page</h1>}/>
       <Route path="/profile" element={<Profile/>}/>
       <Route path="/products" element={<Products/>}/>
       <Route path="/products/:id" element={<ViewProject/>}/>

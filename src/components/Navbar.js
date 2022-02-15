@@ -41,11 +41,11 @@ const Navbar = () => {
 						<div className="hidden md:flex items-center space-x-1">
             {auth?(
               <>
-							<Link to="/" className={`py-4 px-2 border-blue-500 ${pathMatchRoute('/')?'border-b-4 text-blue-600':null}`}>Home</Link>
-							<Link to="/products" className={`block text-sm px-2 py-4 border-blue-500  transition duration-300 ${pathMatchRoute('/products')?'border-b-4 text-blue-600':null} `}>Products</Link>
-							<Link to="/addProduct" className={`block text-sm px-2 py-4 border-blue-500 transition duration-300 ${pathMatchRoute('/addProduct')?'border-b-4 text-blue-600':null} `}>Add Product</Link>
-							<Link to="/your-product" className={`block text-sm px-2 py-4 border-blue-500 transition duration-300 ${pathMatchRoute('/your-product')?'border-b-4 text-blue-600':null} `}>Your Products</Link>
-							<Link to="/updateProduct" className={`block text-sm px-2 py-4 border-blue-500 transition duration-300 ${pathMatchRoute('/updateProduct')?'border-b-4 text-blue-600':null} `}>Update Products</Link>
+				<Link to="/" className={`py-4 px-2 border-blue-500 ${pathMatchRoute('/')?'border-b-4 text-blue-600':null}`}>Home</Link>
+				<Link to="/products" className={`block text-sm px-2 py-4 border-blue-500  transition duration-300 ${pathMatchRoute('/products')?'border-b-4 text-blue-600':null} `}>Products</Link>
+				<Link to="/addProduct" className={`block text-sm px-2 py-4 border-blue-500 transition duration-300 ${pathMatchRoute('/addProduct')?'border-b-4 text-blue-600':null} `}>Add Product</Link>
+				<Link to="/your-product" className={`block text-sm px-2 py-4 border-blue-500 transition duration-300 ${pathMatchRoute('/your-product')?'border-b-4 text-blue-600':null} `}>Your Products</Link>
+				{/* <Link to="/updateProduct" className={`block text-sm px-2 py-4 border-blue-500 transition duration-300 ${pathMatchRoute('/updateProduct')?'border-b-4 text-blue-600':null} `}>Update Products</Link> */}
               </>
 
             ):null}
@@ -61,7 +61,7 @@ const Navbar = () => {
               <Link to="/shopingCart">
                <FaCartPlus className="text-gray-500 hover:text-gray-50 "/>
               </Link>
-              <Link to="/login" onClick={handleLogOut} className="py-2 px-2 font-medium text-gray-400 rounded hover:bg-slate-500 hover:text-white transition duration-300">Log Out</Link>
+              <Link to="/login" onClick={handleLogOut} className=" font-medium text-gray-400 rounded hover:bg-slate-500 hover:text-white transition duration-300 btn btn-sm btn-outline btn-primary py-2 px-2">Log Out</Link>
               <Link to="/profile">
               <img src="ankit.jpg" alt="profile" className="w-10 rounded-full" />
               </Link>
@@ -108,9 +108,9 @@ const Navbar = () => {
           <li>
           <Link to="/your-product" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Your Products</Link>
           </li>
-          <li>
+          {/* <li>
           <Link to="/updateProduct" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Update Products</Link>
-          </li>
+          </li> */}
           <li>
           <Link to="/profile" className="text-sm px-2 py-4 hover:bg-green-500 transition duration-300 flex" >
               <img src="ankit.jpg" alt="profile" className="w-10 rounded-full" /> <span className="m-1">Profile</span>

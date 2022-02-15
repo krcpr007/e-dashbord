@@ -4,13 +4,11 @@ import {AiFillFacebook} from "react-icons/ai"
 import {BsYoutube} from 'react-icons/bs';
 import {Link} from "react-router-dom";
 function Footer() {
+  const date = new Date(); 
+  const year = date.getFullYear();
     return (
-      <footer className="p-10 footer bg-base-900 text-base-content footer-center">
+      <footer className="p-10 footer bg-slate-800 text-base-content footer-center">
       <div className="grid grid-flow-col gap-4">
-        {/* <a className="link link-hover">About us</a> 
-        <a className="link link-hover">Contact</a> 
-        <a className="link link-hover">Jobs</a> 
-        <a className="link link-hover">Press kit</a> */}
       </div> 
       <div>
         <div className="grid grid-flow-col gap-4">
@@ -26,7 +24,7 @@ function Footer() {
         </div>
       </div> 
       <div>
-        <p>Copyright © 2021 - All right reserved by ACME Industries Ltd</p>
+        <p>Copyright © {year} - All right reserved by ACME Industries Ltd</p>
       </div>
     </footer>
     
