@@ -1,26 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect , useContext } from "react";
 import Product from "./Product";
+import ProductContext from "../context/ProductContext";
 function YoursProduct() {
-    const auth = localStorage.getItem("user");
-    const userData = JSON.parse(auth);
-    const [data, setData] = useState([]);
-    const yourProduct = async()=>{
-        const userId = userData._id;
-        let result = await fetch('http://localhost:5000/yours-products', {
-            method:'POST', 
-            body:JSON.stringify({userId}),
-            headers:{
-                'Content-Type':'application/json'
-            },
-        })
-        result = await result.json(); 
-        setData(result)
-        console.warn(result);
-    }
+  const { data , yourProduct} = useContext(ProductContext);
     useEffect(() => {
         yourProduct();
     }, []);
-    
     return (
         <div className="">
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
