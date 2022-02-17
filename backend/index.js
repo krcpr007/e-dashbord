@@ -73,13 +73,13 @@ app.get("/all-products", async (req, resp) => {
 });
 // Searching api for products
 
-app.get("/search/:query", async (req, resp) => {
+app.get("/search/:key", async (req, resp) => {
   let product = await Product.find({
     $or: [
-      { name: { $regex: req.params.query } },
-      { compnay: { $regex: req.params.query } },
-      { catogory: { $regex: req.params.query } },
-      { price: { $regex: req.params.query } },
+      { name: { $regex: req.params.key } },
+      { price: { $regex: req.params.key } },
+      { catogory: { $regex: req.params.key } },
+      { company: { $regex: req.params.key } },
     ],
   });
   if (product) {
