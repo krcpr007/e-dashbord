@@ -1,14 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext ,useEffect } from "react";
 import Product from "./Product";
 import ProductContext from "../context/ProductContext";
 function Products() {
-  const { data,search,setSearch ,handleOnClear ,SearchQuery} = useContext(ProductContext);
+  const { data,search,setSearch ,handleOnClear ,SearchQuery , allProducts} = useContext(ProductContext);
+  useEffect(() => {
+    allProducts();
+  }, []);
   return (
     <div className="">
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
       <h1 className="text-center font-semibold text-gray-500 text-lg md:text-4xl">Products are available right now</h1>
       <form className="flex ">
-      <input type="text" id="email-adress-icon" onChange={(e)=>setSearch(e.target.value)} value={search} className="block p-2 pl-10  text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Product"></input>
+      <input type="text" id="email-adress-icon" onChange={e=>setSearch(e.target.value)} value={search} className="block p-2 pl-10  text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Product"></input>
        <button type="submit" className="text-sm bg-slate-900 rounded-lg mx-1 px-2 py-1" onClick={SearchQuery}>Seacrch</button>
        {
         search===""?(null):( <button onClick={handleOnClear} className="text-sm bg-slate-900 rounded-lg mx-1 px-3 py-1">Clear</button>)
