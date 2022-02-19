@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { toast } from "react-toastify"; 
+import { toast } from "react-toastify";
 const ProductContext = createContext();
 // require('dotenv').config()
 export function ProductProvider({ children }) {
@@ -20,12 +20,16 @@ export function ProductProvider({ children }) {
   // Searching for product
   const SearchQuery = async (e) => {
     e.preventDefault();
-  fetch(`http://localhost:5000/search/${search}`)  //http://localhost:5000/search
+    fetch(`http://localhost:5000/search/${search}`) //http://localhost:5000/search
       .then((resp) => resp.json())
       .then((json) => {
         setData(json);
         console.log(json);
-         toast.success("Item found");
+        if (json.length === 0) {
+          toast.success("No Item found");
+        } else {
+          toast.success(json.length + " Item found");
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -38,22 +42,22 @@ export function ProductProvider({ children }) {
     setSearch("");
     allProducts();
   };
-  //  findig user registerd product 
-  const yourProduct = async()=>{
+  //  findig user registerd product
+  const yourProduct = async () => {
     const userId = userData._id;
-    let result = await fetch('http://localhost:5000/yours-products', {
-        method:'POST', 
-        body:JSON.stringify({userId}),
-        headers:{
-            'Content-Type':'application/json'
-        },
-    })
-        result = await result.json(); 
-        if(result){
-          setData(result)
-          console.warn(result);
-        }
-}
+    let result = await fetch("http://localhost:5000/yours-products", {
+      method: "POST",
+      body: JSON.stringify({ userId }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    result = await result.json();
+    if (result) {
+      setData(result);
+      console.warn(result);
+    }
+  };
   return (
     <ProductContext.Provider
       value={{
