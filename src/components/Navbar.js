@@ -68,8 +68,8 @@ const Navbar = () => {
               </>
             ):(
               <>
-              <Link to="/login" className="py-2 px-2 font-medium text-gray-500 rounded hover:bg-green-500 hover:text-white transition duration-300">Log In</Link>
-						  <Link to="/signup" className="py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">Sign Up</Link>
+              <Link to="/login" className=" font-medium text-blue-600 rounded hover:text-white transition duration-300 btn btn-sm btn-outline outline-blue-600 hover:bg-blue-600 hover:outline-blue-600  py-2 px-2">Log In</Link>
+						  <Link to="/signup" className=" font-medium text-blue-600 rounded hover:text-white transition duration-300 btn btn-sm btn-outline outline-blue-600 hover:bg-blue-600 hover:outline-blue-600  py-2 px-2">Sign Up</Link>
               </>
             )}
 					</div>
@@ -108,9 +108,6 @@ const Navbar = () => {
           <li>
           <Link to="/your-product" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Your Products</Link>
           </li>
-          {/* <li>
-          <Link to="/updateProduct" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Update Products</Link>
-          </li> */}
           <li>
           <Link to="/profile" className="text-sm px-2 py-4 hover:bg-green-500 transition duration-300 flex" >
               <img src="ankit.jpg" alt="profile" className="w-10 rounded-full" /> <span className="m-1">Profile</span>
@@ -120,18 +117,15 @@ const Navbar = () => {
           ):(
             <>
             <li className="">
-          <Link to="/login" className="block text-sm px-2 py-4 text-white bg-green-500 font-semibold">Log In</Link>
+          <Link to="/login" className="block text-sm px-2 py-4 text-white bg-blue-500 font-semibold">Log In</Link>
           </li>
           <li>
-          <Link to="/signup" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Sign Up</Link>
+          <Link to="/signup" className="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Sign Up</Link>
           </li>
             </>
           )}
 				</ul>
 			</div>
-			<script>
-
-			</script>
 		</nav>
   );
 };
