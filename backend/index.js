@@ -31,6 +31,7 @@ app.post("/signup", async (req, resp) => {
       console.log("User already register");
     }
   } catch (e) {
+    console.log(e);
     resp.send("Something Went Wrong");
   }
 });
@@ -48,6 +49,7 @@ app.post("/login", async (req, resp) => {
       resp.send({ result: "No user found" });
     }
   } catch (error) {
+    console.log(error);
     resp.send({ result: "No user found" });
   }
 });
@@ -58,41 +60,55 @@ app.post("/add-product", async (req, resp) => {
     let result = await product.save();
     resp.send(result);
   } catch (error) {
+    console.log(error);
     resp.send("Error");
   }
   // console.log(result, req.files);
 });
 // all products available on database
 app.get("/all-products", async (req, resp) => {
-  let product = await Product.find({});
-  if (product) {
-    resp.send(product);
-  } else {
-    resp.send({ result: "Doesn't Have data" });
+  try {
+    let product = await Product.find({});
+    if (product) {
+      resp.send(product);
+    } else {
+      resp.send({ result: "Doesn't Have data" });
+    }
+  } catch (error) {
+    console.log(error);
   }
 });
-// Searching api for products
 
+// Searching api for products
 app.get("/search/:key", async (req, resp) => {
-  let product = await Product.find({
-    $or: [
-      { name: { $regex: req.params.key } },
-      { price: { $regex: req.params.key } },
-      { catogory: { $regex: req.params.key } },
-      { company: { $regex: req.params.key } },
-    ],
-  });
-  if (product) {
-    resp.send(product);
+  try {
+    let product = await Product.find({
+      $or: [
+        { name: { $regex: req.params.key } },
+        { price: { $regex: req.params.key } },
+        { catogory: { $regex: req.params.key } },
+        { company: { $regex: req.params.key } },
+      ],
+    });
+    if (product) {
+      resp.send(product);
+    }
+  } catch (error) {
+    console.log(error);
   }
 });
+
 // your own products
 app.post("/yours-products", async (req, resp) => {
-  let product = await Product.find(req.body);
-  if (product) {
-    resp.send(product);
-  } else {
-    resp.send({ result: "Doesn't Have data" });
+  try {
+    let product = await Product.find(req.body);
+    if (product) {
+      resp.send(product);
+    } else {
+      resp.send({ result: "Doesn't Have data" });
+    }
+  } catch (error) {
+    console.log(error);
   }
 });
 // delete a product via thier owner
@@ -145,11 +161,15 @@ app.post("/wishlists", async (req, resp) => {
   }
 });
 app.get("/get-wishlist", async (req, resp) => {
-  let wishlist = await Wishlist.find(req.body);
-  if (wishlist) {
-    resp.send(wishlist);
-  } else {
-    resp.send({ error: "No Data found" });
+  try {
+    let wishlist = await Wishlist.find(req.body);
+    if (wishlist) {
+      resp.send(wishlist);
+    } else {
+      resp.send({ error: "No Data found" });
+    }
+  } catch (error) {
+    console.log(error);
   }
 });
 app.post("/add-to-cart/:id", async (req, resp) => {
